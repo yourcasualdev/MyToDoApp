@@ -31,7 +31,7 @@ const AddTask = ({ isLoading, setIsLoading, reload, setReload }) => {
 
     return (
         <View style={styles.container}>
-            <TextInput style={styles.textInput} value={text} onChangeText={(text) => { setText(text) }} />
+            <TextInput placeholderTextColor={'grey'} placeholder='Görev ekle.' style={styles.textInput} value={text} onChangeText={(text) => { setText(text) }} />
             <Pressable onPress={() => onSubmit()} style={styles.pressable}><Text style={{ color: "white", alignItems: "center", textAlign: "center", fontSize: 40 }}>&#43;</Text></Pressable>
         </View>
     )
@@ -45,13 +45,14 @@ const styles = StyleSheet.create({
         alignContent: "space-between",
         width: '100%',
         paddingTop: 10,
+        paddingLeft: 10,
         backgroundColor: 'black',
         height: 85,
         alignItems: 'center',
         zIndex: 3,
     },
     textInput: {
-        color: "white", borderWidth: 1, width: "80%", height: 60, borderColor: "white", borderRadius: 10, padding: 10
+        color: "white", borderWidth: 1, width: "80%", height: 60, borderColor: "white", borderRadius: 10, padding: 10, fontSize: 25,
     },
     pressable: {
         backgroundColor: "blue", marginLeft: 14, width: 60, height: 60, borderRadius: 100

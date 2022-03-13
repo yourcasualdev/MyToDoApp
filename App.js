@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image, Button, Alert, ScrollView, SafeAreaView, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, Alert, ScrollView, SafeAreaView, StatusBar } from 'react-native';
 import { useState, useEffect, React } from 'react';
 import Task from './app/components/Task';
 import AddTask from './app/components/AddTask';
@@ -8,6 +8,7 @@ export default function App() {
   const [tasks, settasks] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [reload, setReload] = useState(1)
+
   useEffect(async () => {
     try {
       setIsLoading(true)
@@ -30,13 +31,13 @@ export default function App() {
   return (
     <>
       <StatusBar barStyle="light-content" />
-      <SafeAreaView style={{ alignItems: 'center', flex: 1, marginTop: -20 }}>
-        <View style={{ backgroundColor: "black", width: "100%", height: 100, alignItems: "center", padding: 10, marginTop: 20 }}>
-          <Text style={{ fontSize: 60, color: "white", fontWeight: "100" }}>Görevler</Text>
+      <SafeAreaView style={styles.container}>
+        <View style={styles.titleWrapper}>
+          <Text style={styles.title}>Görevler</Text>
         </View>
-        <ScrollView onRefresh contentContainerStyle={{ alignItems: "center", paddingTop: 10 }} style={{ backgroundColor: "black", width: "100%" }}>
+        <ScrollView onRefresh contentContainerStyle={{ alignItems: "center", paddingTop: 10 }} style={styles.tasksWrapper}>
           {tasks.map((task, index) => (
-            <Task key={index} name={task.name} completed={task.completed} id={task._id} />
+            <Task key={index} name={task.name} completed={task.completed} id={task._id} setReload={setReload} reload={reload} />
           ))}
         </ScrollView>
         <AddTask isLoading={isLoading} setIsLoading={setIsLoading} reload={reload} setReload={setReload} />
@@ -47,17 +48,8 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  button: {
-    backgroundColor: 'green',
-    borderRadius: 10,
-    padding: 10,
-    margin: 10,
-
-  }
+  container: { alignItems: 'center', flex: 1, marginTop: -20 },
+  titleWrapper: { backgroundColor: "black", width: "100%", height: 100, alignItems: "center", padding: 10, marginTop: 20 },
+  title: { fontSize: 60, color: "white", fontWeight: "100" },
+  tasksWrapper: { backgroundColor: "black", width: "100%" }
 });
